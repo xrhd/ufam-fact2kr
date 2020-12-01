@@ -1,1 +1,3 @@
-# fac2kr# ufam-fact2kr
+# ufam-fact2kr
+
+`python fact2kr.py`
