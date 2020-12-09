@@ -82,19 +82,19 @@ def fact2kr(data: dict) -> dict:
         for ys in data['values'].values()
     ])
     error_table = (error_table.T - np.array(df.y_mean)).T
-    res['sse'] = (error_table ** 2).sum()
+    res['sse'] = (error_table ** 2).sum().round(4)
 
     q.pop('I')
     partial_effects = factor * q**2
 
-    res['sst'] = float(partial_effects.sum(1))
-    res['variable_effects'] = (partial_effects.iloc[0] / res['sst']).to_dict()
+    res['sst'] = float(partial_effects.sum(1).round(4))
+    res['variable_effects'] = ((partial_effects.iloc[0] / res['sst']).round(4)).to_dict()
 
 
     return res
 
 if __name__ == "__main__":
-    path = './data/test.json'
+    path = './data/data.json'
     data = get_data_from_path(path)
     res = fact2kr(data)
     print(json.dumps(res, indent=4))
